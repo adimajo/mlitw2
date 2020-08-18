@@ -1,0 +1,238 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API.predict &mdash; ML interview - Fraud detection API 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ML interview - Fraud detection API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../API.models.html">API.models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API.train.html">API.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API.predict.html">API.predict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API.wsgi.html">API.wsgi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API.gini.html">API.gini</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ML interview - Fraud detection API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>API.predict</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/API.predict.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-predict">
+<h1>API.predict<a class="headerlink" href="#api-predict" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="API.predict">
+<code class="sig-prename descclassname">API.</code><code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_name</span></em>, <em class="sig-param"><span class="n">optimal_threshold</span></em>, <em class="sig-param"><span class="n">Var_1</span></em>, <em class="sig-param"><span class="n">Var_2</span></em>, <em class="sig-param"><span class="n">Var_3</span></em>, <em class="sig-param"><span class="n">Var_4</span></em>, <em class="sig-param"><span class="n">Var_5</span></em>, <em class="sig-param"><span class="n">Var_6</span></em>, <em class="sig-param"><span class="n">Var_7</span></em>, <em class="sig-param"><span class="n">Var_8</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/API/predict.html#predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#API.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predicts fraud for a new customer</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>parse more elegantly kwargs</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_name</strong> – A model name to store the resulting model</p></li>
+<li><p><strong>optimal_threshold</strong> – A threshold to override the calculated one</p></li>
+<li><p><strong>Var_1</strong> – Description of Var_1.</p></li>
+<li><p><strong>Var_2</strong> – Description of Var_2.</p></li>
+<li><p><strong>Var_3</strong> – Description of Var_3.</p></li>
+<li><p><strong>Var_4</strong> – Description of Var_4.</p></li>
+<li><p><strong>Var_5</strong> – Description of Var_5.</p></li>
+<li><p><strong>Var_6</strong> – Description of Var_6.</p></li>
+<li><p><strong>Var_7</strong> – Description of Var_7.</p></li>
+<li><p><strong>Var_8</strong> – Description of Var_8.
+risky.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>prediction as a score</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Adrien Ehrhardt
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

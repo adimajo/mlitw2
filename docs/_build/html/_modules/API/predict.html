@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API.predict &mdash; ML interview - Fraud detection API 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> ML interview - Fraud detection API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API.models.html">API.models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../API.train.html">API.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../API.predict.html">API.predict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../API.wsgi.html">API.wsgi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../API.gini.html">API.gini</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ML interview - Fraud detection API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../API.html">API</a> &raquo;</li>
+        
+      <li>API.predict</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for API.predict</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">prediction functions for API</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">ModelHandler</span>
+<span class="kn">from</span> <span class="nn">.predict_assemble</span> <span class="kn">import</span> <span class="n">predict_assemble</span>
+
+
+<span class="n">binary_to_decision</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;LEGIT&quot;</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;FRAUD&quot;</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="predict"><a class="viewcode-back" href="../../_autosummary/API.predict.html#API.predict">[docs]</a><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span>
+        <span class="n">model_name</span><span class="p">,</span>
+        <span class="n">optimal_threshold</span><span class="p">,</span>
+        <span class="n">Var_1</span><span class="p">,</span>
+        <span class="n">Var_2</span><span class="p">,</span>
+        <span class="n">Var_3</span><span class="p">,</span>
+        <span class="n">Var_4</span><span class="p">,</span>
+        <span class="n">Var_5</span><span class="p">,</span>
+        <span class="n">Var_6</span><span class="p">,</span>
+        <span class="n">Var_7</span><span class="p">,</span>
+        <span class="n">Var_8</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predicts fraud for a new customer</span>
+
+<span class="sd">    .. todo:: parse more elegantly kwargs</span>
+
+<span class="sd">    :param model_name: A model name to store the resulting model</span>
+<span class="sd">    :param optimal_threshold: A threshold to override the calculated one</span>
+<span class="sd">    :param Var_1: Description of Var_1.</span>
+<span class="sd">    :param Var_2: Description of Var_2.</span>
+<span class="sd">    :param Var_3: Description of Var_3.</span>
+<span class="sd">    :param Var_4: Description of Var_4.</span>
+<span class="sd">    :param Var_5: Description of Var_5.</span>
+<span class="sd">    :param Var_6: Description of Var_6.</span>
+<span class="sd">    :param Var_7: Description of Var_7.</span>
+<span class="sd">    :param Var_8: Description of Var_8.</span>
+<span class="sd">        risky.</span>
+<span class="sd">    :return: prediction as a score</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;model_name is required&#39;</span><span class="p">)</span>
+
+    <span class="n">df_to_predict</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s2">&quot;Var_1&quot;</span><span class="p">:</span> <span class="n">Var_1</span><span class="p">,</span>
+        <span class="s2">&quot;Var_2&quot;</span><span class="p">:</span> <span class="n">Var_2</span><span class="p">,</span>
+        <span class="s2">&quot;Var_3&quot;</span><span class="p">:</span> <span class="n">Var_3</span><span class="p">,</span>
+        <span class="s2">&quot;Var_4&quot;</span><span class="p">:</span> <span class="n">Var_4</span><span class="p">,</span>
+        <span class="s2">&quot;Var_5&quot;</span><span class="p">:</span> <span class="n">Var_5</span><span class="p">,</span>
+        <span class="s2">&quot;Var_6&quot;</span><span class="p">:</span> <span class="n">Var_6</span><span class="p">,</span>
+        <span class="s2">&quot;Var_7&quot;</span><span class="p">:</span> <span class="n">Var_7</span><span class="p">,</span>
+        <span class="s2">&quot;Var_8&quot;</span><span class="p">:</span> <span class="n">Var_8</span>
+    <span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">modele</span> <span class="o">=</span> <span class="n">ModelHandler</span><span class="p">()</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;model_name did not match any existing trained model&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="k">if</span> <span class="n">modele</span><span class="o">.</span><span class="n">weak_learner</span> <span class="o">==</span> <span class="s2">&quot;ASSEMBLE&quot;</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">predict_assemble</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">df_to_predict</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">models</span><span class="o">=</span><span class="n">modele</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="n">modele</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">decision</span> <span class="o">=</span> <span class="p">(</span><span class="n">score</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span>
+        <span class="c1"># TODO: calculate the optimal threshold for ASSEMBLE method (not trivial since it&#39;s not a probability)</span>
+        <span class="n">optimal_threshold_calculated</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">modele</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">df_to_predict</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">optimal_threshold_calculated</span> <span class="o">=</span> <span class="n">Var_1</span> <span class="o">/</span> <span class="p">(</span><span class="n">Var_1</span> <span class="o">+</span> <span class="n">modele</span><span class="o">.</span><span class="n">cost_incurred_for_fraud</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">optimal_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">decision</span> <span class="o">=</span> <span class="p">(</span><span class="n">score</span> <span class="o">&gt;</span> <span class="n">optimal_threshold</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">decision</span> <span class="o">=</span> <span class="p">(</span><span class="n">score</span> <span class="o">&gt;</span> <span class="n">optimal_threshold_calculated</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span>
+
+    <span class="n">dict_result</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">score</span><span class="p">,</span>
+        <span class="s2">&quot;optimal_threshold_calculated&quot;</span><span class="p">:</span> <span class="n">optimal_threshold_calculated</span><span class="p">,</span>
+        <span class="s2">&quot;optimal_threshold_provided&quot;</span><span class="p">:</span> <span class="n">optimal_threshold</span><span class="p">,</span>
+        <span class="s2">&quot;decision&quot;</span><span class="p">:</span> <span class="n">binary_to_decision</span><span class="p">[</span><span class="n">decision</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">dict_result</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Adrien Ehrhardt
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

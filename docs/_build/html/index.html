@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to ML interview - Fraud detection API’s documentation! &mdash; ML interview - Fraud detection API 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API.models" href="API.models.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> ML interview - Fraud detection API
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="API.models.html">API.models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API.train.html">API.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API.predict.html">API.predict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API.wsgi.html">API.wsgi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API.gini.html">API.gini</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ML interview - Fraud detection API</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Welcome to ML interview - Fraud detection API’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-ml-interview-fraud-detection-api-s-documentation">
+<h1>Welcome to ML interview - Fraud detection API’s documentation!<a class="headerlink" href="#welcome-to-ml-interview-fraud-detection-api-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-API"></span><p>API module</p>
+<p>Creating classes to learn a model, predict and
+serve these predictions.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/API.models.html#module-API.models" title="API.models"><code class="xref py py-obj docutils literal notranslate"><span class="pre">models</span></code></a></p></td>
+<td><p>handling models.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/API.train.html#module-API.train" title="API.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a></p></td>
+<td><p>training functions for API</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/API.predict.html#API.predict" title="API.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(model_name, optimal_threshold, …)</p></td>
+<td><p>Predicts fraud for a new customer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/API.wsgi.html#module-API.wsgi" title="API.wsgi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wsgi</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/API.gini.html#module-API.gini" title="API.gini"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gini</span></code></a></p></td>
+<td><p>utils for Gini confidence interval</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="API.Predictor">
+<em class="property">class </em><code class="sig-prename descclassname">API.</code><code class="sig-name descname">Predictor</code><a class="reference internal" href="_modules/API.html#Predictor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#API.Predictor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flask_restful.Resource</span></code></p>
+<p>Flask resource to predict</p>
+<dl class="py attribute">
+<dt id="API.Predictor.endpoint">
+<code class="sig-name descname">endpoint</code><em class="property"> = 'predictor'</em><a class="headerlink" href="#API.Predictor.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="API.Predictor.mediatypes">
+<code class="sig-name descname">mediatypes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#API.Predictor.mediatypes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="API.Predictor.methods">
+<code class="sig-name descname">methods</code><em class="property"> = {'POST'}</em><a class="headerlink" href="#API.Predictor.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="API.Predictor.post">
+<code class="sig-name descname">post</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/API.html#Predictor.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#API.Predictor.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>post method for Predictor resource: gets the new predictors in the request, predicts and outputs the score.
+—
+:param - in: body</p>
+<blockquote>
+<div><p>name: body
+schema:</p>
+<blockquote>
+<div><p>id: Predict
+required:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>model_name</p></li>
+<li><p>Var_1</p></li>
+<li><p>Var_2</p></li>
+<li><p>Var_3</p></li>
+<li><p>Var_4</p></li>
+<li><p>Var_5</p></li>
+<li><p>Var_6</p></li>
+<li><p>Var_7</p></li>
+<li><p>Var_8</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>properties:</dt><dd><dl class="simple">
+<dt>model_name:</dt><dd><p>type: string
+description: A model name to store the resulting model</p>
+</dd>
+<dt>Var_1:</dt><dd><p>type: float
+description: Description of Var_1.</p>
+</dd>
+<dt>Var_2:</dt><dd><p>type: float
+description: Description of Var_2.</p>
+</dd>
+<dt>Var_3:</dt><dd><p>type: integer
+description: Description of Var_3.</p>
+</dd>
+<dt>Var_4:</dt><dd><p>type: integer
+description: Description of Var_4.</p>
+</dd>
+<dt>Var_5:</dt><dd><p>type: integer
+description: Description of Var_5.</p>
+</dd>
+<dt>Var_6:</dt><dd><p>type: integer
+description: Description of Var_6.</p>
+</dd>
+<dt>Var_7:</dt><dd><p>type: integer
+description: Description of Var_7.</p>
+</dd>
+<dt>Var_8:</dt><dd><p>type: boolean
+description: Description of Var_8.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<dl class="simple">
+<dt>responses:</dt><dd><dl class="simple">
+<dt>200:</dt><dd><p>description: output of the model</p>
+</dd>
+<dt>400:</dt><dd><p>description: model found but failed</p>
+</dd>
+<dt>500:</dt><dd><p>description: all other server errors</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="API.Trainer">
+<em class="property">class </em><code class="sig-prename descclassname">API.</code><code class="sig-name descname">Trainer</code><a class="reference internal" href="_modules/API.html#Trainer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#API.Trainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flask_restful.Resource</span></code></p>
+<p>Flask resource to train</p>
+<dl class="py attribute">
+<dt id="API.Trainer.endpoint">
+<code class="sig-name descname">endpoint</code><em class="property"> = 'trainer'</em><a class="headerlink" href="#API.Trainer.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="API.Trainer.mediatypes">
+<code class="sig-name descname">mediatypes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#API.Trainer.mediatypes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="API.Trainer.methods">
+<code class="sig-name descname">methods</code><em class="property"> = {'POST'}</em><a class="headerlink" href="#API.Trainer.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="API.Trainer.post">
+<code class="sig-name descname">post</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/API.html#Trainer.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#API.Trainer.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>post method for Trainer resource: will train a new model and store it.
+—
+:param - in: body</p>
+<blockquote>
+<div><p>name: body
+schema:</p>
+<blockquote>
+<div><p>id: Predict
+required:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>model_name</p></li>
+<li><p>cost_incurred_for_fraud</p></li>
+<li><p>proportion_for_test</p></li>
+<li><p>cross_validation</p></li>
+<li><p>weights</p></li>
+<li><p>weak_learner</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>properties:</dt><dd><dl class="simple">
+<dt>model_name:</dt><dd><p>type: string
+description: Name to store the model.</p>
+</dd>
+<dt>cost_incurred_for_fraud:</dt><dd><p>type: number
+description: Cost (positive) when transaction turns out to be a fraud.</p>
+</dd>
+<dt>proportion_for_test:</dt><dd><p>type: number
+description: proportion (should be between 0 and 1) for test dataset</p>
+</dd>
+<dt>cross_validation:</dt><dd><p>type: boolean
+description: whether to perform cross validation (NOT IMPLEMENTED)</p>
+</dd>
+<dt>weights:</dt><dd><p>type: boolean
+description: whether to fit a model for ‘blocked’ and weight samples accordingly (NOT IMPLEMENTED)</p>
+</dd>
+<dt>weak_learner:</dt><dd><p>type: string
+description: class of weak_learner (for now only from sklearn.linear_model)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<dl class="simple">
+<dt>responses:</dt><dd><dl class="simple">
+<dt>200:</dt><dd><p>description: model has been trained and saved, outputs some metrics</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="API.check_between_0_1">
+<code class="sig-prename descclassname">API.</code><code class="sig-name descname">check_between_0_1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/API.html#check_between_0_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#API.check_between_0_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if input is between 0 and 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – input</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>x</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="API.check_learner">
+<code class="sig-prename descclassname">API.</code><code class="sig-name descname">check_learner</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">learner</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/API.html#check_learner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#API.check_learner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the weak learner argument can be imported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>learner</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – weak learner to use in classification</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>learner</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+</tbody>
+</table>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="API.models.html" class="btn btn-neutral float-right" title="API.models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Adrien Ehrhardt
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
