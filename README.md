@@ -68,85 +68,25 @@ Coverage report:
 
 ### Examples
 
-#### Train
-
-##### Logistic regression
-
-POST at http://0.0.0.0:8000/train
-
-```
-{
-    "model_name": "logistic_1.0",
-    "cost_incurred_for_fraud": 15.0,
-    "proportion_for_test": 0.2,
-    "cross_validation": false,
-    "weights": false,
-    "weak_learner": "LogisticRegression"
-}
-```
-
-Response:
-```
-{
-    "test_metrics": {
-        "gini": 0.9439039797852178,
-        "CI": "[0.87708979 1.        ]",
-        "#samples": 1618,
-        "#fraud": 35,
-        "mean_optimal_threshold": 0.5568081098755129,
-        "TP": 13,
-        "TN": 1581,
-        "FN": 22,
-        "FP": 2,
-        "detection_rate": 0.37142857142857144,
-        "precision rate": 0.8666666666666667,
-        "F-score": 0.52,
-        "financial_gain": 29371.009370883305
-    },
-    "train_metrics": {
-        "cross_validation": false,
-        "gini": 0.9115651341396958,
-        "CI": "[0.87906583 0.94406444]",
-        "#samples": 6472,
-        "#fraud": 159,
-        "mean_optimal_threshold": 0.5580248150689585,
-        "TP": 63,
-        "TN": 6295,
-        "FN": 96,
-        "FP": 18,
-        "detection_rate": 0.39622641509433965,
-        "precision rate": 0.7777777777777778,
-        "F-score": 0.525,
-        "financial_gain": 117454.84921713671
-    }
-}
-```
-
 #### Predict
 
 POST at http://0.0.0.0:8000/predict
 
+*Sketch*
+
 ```
 {
-    "model_name": "logistic_1.0",
-    "Var_1": 10.0,
-    "Var_2": 10.0,
-    "Var_3": 4,
-    "Var_4": 4,
-    "Var_5": 10,
-    "Var_6": 200,
-    "Var_7": 20,
-    "Var_8": 0
+    "UserId": [0],
+    "Event": [0],
+    "Category": [0],
 }
 ```
 
 Response:
 ```
 {
-    "score": 0.023666641995322858,
-    "optimal_threshold_calculated": 0.4,
-    "optimal_threshold_provided": null,
-    "decision": "LEGIT"
+    "UserId": [0],
+    "is_fake_probability": [0.023666641995322858]
 }
 ```
 

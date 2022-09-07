@@ -14,7 +14,8 @@ serve these predictions.
     gini
 """
 import numpy as np
-from flask_restx import Resource, Namespace, fields, reqparse, jsonify
+from flask_restx import Resource, Namespace, fields, reqparse
+from flask import jsonify
 from loguru import logger
 
 from API import __version__

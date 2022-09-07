@@ -1,12 +1,10 @@
-FROM python:3.7.2
+FROM python:3.8-slim
 
 RUN pip install pipenv
 
-ADD . /fraud_score
+ADD . /fake_score
 
-WORKDIR /fraud_score
-
-EXPOSE 7000
+WORKDIR /fake_score
 
 EXPOSE 8000
 
