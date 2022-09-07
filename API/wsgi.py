@@ -4,8 +4,8 @@ from flask import Flask
 from flask_restx import Api
 from flask_wtf.csrf import CSRFProtect
 
-from whiteapp import __version__
-from whiteapp.WhiteApp import api as api_namespace
+from API import __version__
+from API.API import api as api_namespace
 
 
 def create_app():
