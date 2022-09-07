@@ -83,4 +83,3 @@ jobs:
           context: API
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.APPLICATION_TAG_VERSION }}
-
