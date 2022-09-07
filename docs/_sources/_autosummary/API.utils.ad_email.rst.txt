@@ -1,0 +1,6 @@
+API.utils.ad\_email
+===================
+
+.. currentmodule:: API.utils
+
+.. autofunction:: ad_email

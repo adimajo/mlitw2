@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API.API &mdash; MLitw2 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> MLitw2
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/API.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MLitw2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>API.API</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for API.API</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">API module</span>
+
+<span class="sd">Creating classes to learn a model, predict and</span>
+<span class="sd">serve these predictions.</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">    :toctree:</span>
+
+<span class="sd">    models</span>
+<span class="sd">    train</span>
+<span class="sd">    predict</span>
+<span class="sd">    wsgi</span>
+<span class="sd">    gini</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">flask_restx</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">Namespace</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">reqparse</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">jsonify</span>
+<span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+
+<span class="kn">from</span> <span class="nn">API</span> <span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span> <span class="nn">API.API.predict</span> <span class="kn">import</span> <span class="n">predict</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">Namespace</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="n">my_output</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">})</span>
+
+
+<div class="viewcode-block" id="Version"><a class="viewcode-back" href="../../_autosummary/API.API.html#API.API.Version">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/version&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Version</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flask resource to spit current version</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@api</span><span class="o">.</span><span class="n">marshal_with</span><span class="p">(</span><span class="n">my_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Successful GET&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">}</span></div>
+
+
+<span class="n">str_required</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+
+<span class="n">int_required</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+
+<span class="n">float_required</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+
+<span class="n">bool_required</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="check_between_0_1"><a class="viewcode-back" href="../../_autosummary/API.API.html#API.API.check_between_0_1">[docs]</a><span class="k">def</span> <span class="nf">check_between_0_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks if input is between 0 and 1.</span>
+
+<span class="sd">    :param x: input</span>
+<span class="sd">    :type x: float or int</span>
+<span class="sd">    :return: x</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid value for proportion_for_test: must be between 0 and 1.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+
+
+<span class="n">b0_1_required</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">check_between_0_1</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+    <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+
+<span class="n">b0_1_not_required</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">check_between_0_1</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+    <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+
+<span class="n">predict_parser</span> <span class="o">=</span> <span class="n">reqparse</span><span class="o">.</span><span class="n">RequestParser</span><span class="p">()</span>
+<span class="n">predict_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;UserId&#39;</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Description of UserId.&#39;</span><span class="p">,</span>
+                            <span class="o">**</span><span class="n">str_required</span><span class="p">)</span>
+<span class="n">predict_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;Event&#39;</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Description of Event.&#39;</span><span class="p">,</span>
+                            <span class="o">**</span><span class="n">str_required</span><span class="p">)</span>
+<span class="n">predict_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Description of Category.&#39;</span><span class="p">,</span>
+                            <span class="o">**</span><span class="n">str_required</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Predictor"><a class="viewcode-back" href="../../_autosummary/API.API.html#API.API.Predictor">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/predict&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Predictor</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flask resource to predict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Predictor.post"><a class="viewcode-back" href="../../_autosummary/API.API.html#API.API.Predictor.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        post method for Predictor resource: gets the new predictors in the request, predicts and outputs the score.</span>
+<span class="sd">        ---</span>
+<span class="sd">        parameters:</span>
+<span class="sd">          - in: body</span>
+<span class="sd">            name: body</span>
+<span class="sd">            schema:</span>
+<span class="sd">              id: Predict</span>
+<span class="sd">              required:</span>
+<span class="sd">                - UserId</span>
+<span class="sd">                - Event</span>
+<span class="sd">                - Category</span>
+<span class="sd">              properties:</span>
+<span class="sd">                Var_1:</span>
+<span class="sd">                  type: float</span>
+<span class="sd">                  description: Description of Var_1.</span>
+<span class="sd">                Var_2:</span>
+<span class="sd">                  type: float</span>
+<span class="sd">                  description: Description of Var_2.</span>
+<span class="sd">                Var_3:</span>
+<span class="sd">                  type: integer</span>
+<span class="sd">                  description: Description of Var_3.</span>
+<span class="sd">        responses:</span>
+<span class="sd">            200:</span>
+<span class="sd">                description: output of the model</span>
+<span class="sd">            400:</span>
+<span class="sd">                description: model found but failed</span>
+<span class="sd">            500:</span>
+<span class="sd">                description: all other server errors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="n">predict_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Successfully parsed arguments&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Successfully predicted&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;is_fake_probability&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">jsonify</span><span class="p">(</span><span class="s2">&quot;Model failed&quot;</span><span class="p">)</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">400</span>
+
+        <span class="k">return</span> <span class="n">response</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Adrien Ehrhardt.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

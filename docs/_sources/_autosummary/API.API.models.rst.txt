@@ -1,0 +1,35 @@
+API.API.models
+==============
+
+.. automodule:: API.API.models
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      model_path
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ModelHandler
+   
+   
+
+   
+   
+   
+
+
+

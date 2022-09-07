@@ -1,0 +1,40 @@
+API.API
+=======
+
+.. automodule:: API.API
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      check_between_0_1
+      jsonify
+      predict
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Namespace
+      Predictor
+      Resource
+      Version
+   
+   
+
+   
+   
+   
+
+
+

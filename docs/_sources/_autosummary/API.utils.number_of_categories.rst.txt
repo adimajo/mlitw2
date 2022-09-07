@@ -1,0 +1,6 @@
+API.utils.number\_of\_categories
+================================
+
+.. currentmodule:: API.utils
+
+.. autofunction:: number_of_categories

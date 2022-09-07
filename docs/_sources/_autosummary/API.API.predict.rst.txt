@@ -1,0 +1,6 @@
+API.API.predict
+===============
+
+.. currentmodule:: API.API
+
+.. autofunction:: predict

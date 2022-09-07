@@ -1,0 +1,6 @@
+API.API.models.model\_path
+==========================
+
+.. currentmodule:: API.API.models
+
+.. autofunction:: model_path

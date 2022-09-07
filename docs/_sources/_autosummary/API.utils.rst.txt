@@ -1,0 +1,34 @@
+API.utils
+=========
+
+.. automodule:: API.utils
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      ad_email
+      most_frequent
+      n_changes
+      number_of_categories
+      number_of_clicks
+      total_time
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

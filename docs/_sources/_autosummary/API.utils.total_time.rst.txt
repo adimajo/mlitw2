@@ -1,0 +1,6 @@
+API.utils.total\_time
+=====================
+
+.. currentmodule:: API.utils
+
+.. autofunction:: total_time

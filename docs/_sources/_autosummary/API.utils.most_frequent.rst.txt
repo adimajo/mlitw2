@@ -1,0 +1,6 @@
+API.utils.most\_frequent
+========================
+
+.. currentmodule:: API.utils
+
+.. autofunction:: most_frequent
