@@ -14,11 +14,11 @@ serve these predictions.
     gini
 """
 import numpy as np
-from API.API.predict import predict
-from API.API.models import ModelHandler
-from flask_restx import Resource, Namespace, fields
+from flask_restx import Resource, Namespace, fields, reqparse, jsonify
 from loguru import logger
+
 from API import __version__
+from API.API.predict import predict
 
 api = Namespace('')
 
@@ -88,38 +88,18 @@ b0_1_not_required = {
 }
 
 predict_parser = reqparse.RequestParser()
-predict_parser.add_argument('model_name',
-                            help="A model name to predict",
+predict_parser.add_argument('UserId',
+                            help='Description of UserId.',
                             **str_required)
-predict_parser.add_argument('optimal_threshold',
-                            help="A threshold to override the calculated one",
-                            **b0_1_not_required)
-predict_parser.add_argument('Var_1',
-                            help='Description of Var_1.',
-                            **float_required)
-predict_parser.add_argument('Var_2',
-                            help='Description of Var_2.',
-                            **float_required)
-predict_parser.add_argument('Var_3',
-                            help="Description of Var_3.",
-                            **int_required)
-predict_parser.add_argument('Var_4',
-                            help="Description of Var_4.",
-                            **int_required)
-predict_parser.add_argument('Var_5',
-                            help='Description of Var_5.',
-                            **int_required)
-predict_parser.add_argument('Var_6',
-                            help="Description of Var_6.",
-                            **int_required)
-predict_parser.add_argument('Var_7',
-                            help='Description of Var_7.',
-                            **int_required)
-predict_parser.add_argument('Var_8',
-                            help='Description of Var_8.',
-                            **bool_required)
+predict_parser.add_argument('Event',
+                            help='Description of Event.',
+                            **str_required)
+predict_parser.add_argument('Category',
+                            help='Description of Category.',
+                            **str_required)
 
 
+@api.route('/predict')
 class Predictor(Resource):
     """
     Flask resource to predict
@@ -134,19 +114,10 @@ class Predictor(Resource):
             schema:
               id: Predict
               required:
-                - model_name
-                - Var_1
-                - Var_2
-                - Var_3
-                - Var_4
-                - Var_5
-                - Var_6
-                - Var_7
-                - Var_8
+                - UserId
+                - Event
+                - Category
               properties:
-                model_name:
-                  type: string
-                  description: A model name to store the resulting model
                 Var_1:
                   type: float
                   description: Description of Var_1.
@@ -156,21 +127,6 @@ class Predictor(Resource):
                 Var_3:
                   type: integer
                   description: Description of Var_3.
-                Var_4:
-                  type: integer
-                  description: Description of Var_4.
-                Var_5:
-                  type: integer
-                  description: Description of Var_5.
-                Var_6:
-                  type: integer
-                  description: Description of Var_6.
-                Var_7:
-                  type: integer
-                  description: Description of Var_7.
-                Var_8:
-                  type: boolean
-                  description: Description of Var_8.
         responses:
             200:
                 description: output of the model
@@ -181,11 +137,10 @@ class Predictor(Resource):
         """
         kwargs = predict_parser.parse_args(strict=True)
         logger.info("Successfully parsed arguments")
-
         result = predict(**kwargs)
         logger.info("Successfully predicted")
 
-        if not result["score"] == np.nan:
+        if not result["is_fake_probability"] == np.nan:
             response = jsonify(result)
             response.status_code = 200
         else:

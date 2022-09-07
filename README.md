@@ -20,6 +20,10 @@ We need to save [COMPANY]'s reputation detecting these fake users. To do so, we 
 of five minutes. Each entry contains the user id (UserId), the action that a user made (Event), the category it
 interacted with (Category) and a column (Fake) indicating if that user is fake (1 is fake, 0 is a real user).
 
+## Answer
+
+`PYTHONPATH=. python scripts/predict.py data/fake_users_test.csv data/fake_users_test_prob.csv`
+
 ## Installing
 
 `git clone https://github.com/adimajo/MLitw2.git`

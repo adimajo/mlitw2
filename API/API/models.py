@@ -8,20 +8,19 @@ handling models.
     ModelHandler
 """
 import os
-import pickle
+import pickle  # nosec
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_DIR = os.path.join(BASE_DIR, 'models')
 
 
-def model_path(model_name):
+def model_path():
     """
     Generating or getting a model path
 
-    :param str model_name: name of the model
     :return: path
     """
-    return os.path.join(MODEL_DIR, "{}.pkl".format(model_name))
+    return os.path.join(MODEL_DIR, "model")
 
 
 class ModelHandler(object):
@@ -33,25 +32,26 @@ class ModelHandler(object):
         Just a model
         """
         self.model = None
-        self.model_name = None,
+        self.encoder = None
 
-    def get_model(self, model_name):
+    def get_model(self):
         """
         Getter for model
 
-        :param model_name: name of the model to get and load
         :return: model
         """
-        if self.model is None:
-            self = self.load(model_name)
-        return self
+        if self.model is None or self.encoder is None:
+            self.encoder, self.model = self.load()
+        return self.encoder, self.model
 
-    def load(self, model_name):
+    def load(self):
         """
         Load a model
 
-        :param model_name: the name of the model to load
         :return: the model
         """
-        with open(model_path(model_name=model_name), 'rb') as pickle_path:
-            return pickle.load(pickle_path)
+        with open(model_path(), 'rb') as pickle_path:
+            encoder = pickle.load(pickle_path)  # nosec
+        with open(model_path(), 'rb') as pickle_path:
+            model = pickle.load(pickle_path)  # nosec
+        return encoder, model
