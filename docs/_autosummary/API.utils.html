@@ -18,7 +18,9 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API.utils.number_of_clicks" href="API.utils.number_of_clicks.html" />
+    <link rel="prev" title="API.API.predict" href="API.API.predict.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,8 +41,20 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="API.html">API</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="API.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="API.API.html">API.API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">API.utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API.utils.number_of_clicks.html">API.utils.number_of_clicks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API.utils.ad_email.html">API.utils.ad_email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API.utils.number_of_categories.html">API.utils.number_of_categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API.utils.total_time.html">API.utils.total_time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API.utils.most_frequent.html">API.utils.most_frequent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API.utils.n_changes.html">API.utils.n_changes</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -57,6 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="API.html">API</a> &raquo;</li>
       <li>API.utils</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/_autosummary/API.utils.rst.txt" rel="nofollow"> View page source</a>
@@ -69,17 +84,33 @@
              
   <section id="module-API.utils">
 <span id="api-utils"></span><h1>API.utils<a class="headerlink" href="#module-API.utils" title="Permalink to this heading"></a></h1>
-<p>utils module
-.. autosummary:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">toctree</span><span class="p">:</span>
-<span class="n">number_of_clicks</span>
-<span class="n">ad_email</span>
-<span class="n">number_of_categories</span>
-<span class="n">total_time</span>
-<span class="n">most_frequent</span>
-<span class="n">n_changes</span>
-</pre></div>
-</div>
+<p>utils module</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="API.utils.number_of_clicks.html#API.utils.number_of_clicks" title="API.utils.number_of_clicks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_clicks</span></code></a>(df)</p></td>
+<td><p>Return the number of clicks per user on the whole set</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="API.utils.ad_email.html#API.utils.ad_email" title="API.utils.ad_email"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ad_email</span></code></a>(df)</p></td>
+<td><p>Return the number of click_ad and send_email per user on the whole set</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="API.utils.number_of_categories.html#API.utils.number_of_categories" title="API.utils.number_of_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_categories</span></code></a>(df)</p></td>
+<td><p>Return the number of number_of_categories per user on the whole set</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="API.utils.total_time.html#API.utils.total_time" title="API.utils.total_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">total_time</span></code></a>(df)</p></td>
+<td><p>Return the total_time per user on the whole set</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="API.utils.most_frequent.html#API.utils.most_frequent" title="API.utils.most_frequent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">most_frequent</span></code></a>(df)</p></td>
+<td><p>Return the most frequent event and category per user</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="API.utils.n_changes.html#API.utils.n_changes" title="API.utils.n_changes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_changes</span></code></a>(df)</p></td>
+<td><p>Return the number of changes of category per user</p></td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Functions</p>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
@@ -196,7 +227,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="API.API.predict.html" class="btn btn-neutral float-left" title="API.API.predict" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="API.utils.number_of_clicks.html" class="btn btn-neutral float-right" title="API.utils.number_of_clicks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
