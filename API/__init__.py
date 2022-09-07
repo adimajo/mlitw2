@@ -1,7 +1,9 @@
 """
 API application
+
 .. autosummary::
     :toctree:
+
     API
     utils
 """

@@ -1,5 +1,6 @@
-
-
+"""
+wsgi module
+"""
 from flask import Flask
 from flask_restx import Api
 from flask_wtf.csrf import CSRFProtect
@@ -11,6 +12,7 @@ from API.API import api as api_namespace
 def create_app():
     """
     Creates the model serving Flask app
+
     :return: Flask app
     """
     app = Flask(__name__)

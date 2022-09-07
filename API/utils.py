@@ -1,7 +1,9 @@
 """
 utils module
+
 .. autosummary::
     :toctree:
+
     number_of_clicks
     ad_email
     number_of_categories
